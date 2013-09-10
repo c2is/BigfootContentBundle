@@ -1,0 +1,26 @@
+<div class="form_widget_element">
+    <div class="header_form_widget_element">{{ form.vars.value.label }}</div>
+    <div class="body_form_widget_element" {% if block_id is defined and block_type is defined %}id="{{block_type}}-{{ block_id }}"{% endif %}>
+        <form action="{{ action_path }}" method="post">
+
+            {% if method is defined %}
+                <input type="hidden" name="_method" value="{{ method }}" />
+            {% endif %}
+
+            {{ form_widget(form.sidebar, {'attr': {'class': 'sidebar_select'}, value: currentSidebar|number_format}) }}
+
+            {{ form_widget(form.position, {'attr': {'class': 'sortable-field'}}) }}
+
+            {{ form_rest(form) }}
+            <div class="widget-foot">
+                <button class="btn btn-primary" type="submit">{{ 'Submit' | trans }}</button>
+
+                {% if delete_path is defined %}
+                    <a class="btn btn-primary" href="{{ delete_path }}">{{ 'Delete' | trans }}</a>
+                {% else %}
+                    <a class="btn btn-primary delete_widget_container" href="#_">{{ 'Delete' | trans }}</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{% extends bigfoot_theme_values.bundle~'::base.html.twig' %}
+
+{% block body %}
+    {% include 'BigfootCoreBundle:crud:list.html.twig' with {
+    'action_edit': 'admin_sidebar_edit',
+    'list_title': 'Sidebar list',
+    'fieldsList': {id: 'ID', title: 'Title', template: 'Template', active : 'Active'}
+    } %}
+{% endblock %}

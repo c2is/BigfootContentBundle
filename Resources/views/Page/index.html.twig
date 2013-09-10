@@ -1,0 +1,9 @@
+{% extends bigfoot_theme_values.bundle~'::base.html.twig' %}
+
+{% block body %}
+    {% include 'BigfootCoreBundle:crud:list.html.twig' with {
+    'action_edit': 'admin_page_edit',
+    'list_title': 'Page list',
+    'fieldsList': {id: 'ID', title: 'Title', description: 'Description', template: 'Template', image: 'Image', active : 'Active'}
+    } %}
+{% endblock %}

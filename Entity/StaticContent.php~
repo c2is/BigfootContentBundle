@@ -1,0 +1,185 @@
+<?php
+
+namespace Bigfoot\Bundle\ContentBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * StaticContent
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Bigfoot\Bundle\ContentBundle\Entity\StaticContentRepository")
+ */
+class StaticContent
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="template", type="string", length=255)
+     */
+    private $template;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
+     * @var Sidebar $sidebar
+     *
+     * @ORM\ManyToOne(targetEntity="Sidebar", inversedBy="staticcontent", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="sidebar_id", referencedColumnName="id")
+     */
+    private $sidebar;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return StaticContent
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return StaticContent
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set template
+     *
+     * @param string $template
+     * @return StaticContent
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+    
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return string 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return StaticContent
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set sidebar
+     *
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Sidebar $sidebar
+     * @return StaticContent
+     */
+    public function setSidebar(\Bigfoot\Bundle\ContentBundle\Entity\Sidebar $sidebar = null)
+    {
+        $this->sidebar = $sidebar;
+    
+        return $this;
+    }
+
+    /**
+     * Get sidebar
+     *
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Sidebar 
+     */
+    public function getSidebar()
+    {
+        return $this->sidebar;
+    }
+}

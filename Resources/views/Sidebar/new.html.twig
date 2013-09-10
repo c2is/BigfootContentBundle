@@ -1,0 +1,10 @@
+{% extends bigfoot_theme_values.bundle~'::base.html.twig' %}
+
+{% block body %}
+    {% include 'BigfootCoreBundle:crud:form.html.twig' with {
+    'action_route': path('admin_sidebar_create'),
+    'action_name': 'Create sidebar',
+    'form_title': 'Sidebar creation',
+    'cancel_route': 'admin_dashboard'
+    } %}
+{% endblock %}

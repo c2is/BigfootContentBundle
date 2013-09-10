@@ -1,0 +1,18 @@
+parameters:
+    bigfoot_content.template.class: 'Bigfoot\Bundle\ContentBundle\Services\Template'
+    bigfoot_content.widgettype.class: 'Bigfoot\Bundle\ContentBundle\Form\WidgetType'
+
+services:
+    bigfoot_content.template:
+            class: '%bigfoot_content.template.class%'
+
+    bigfoot_bundle_contentbundle_widgettype:
+            class: '%bigfoot_content.widgettype.class%'
+            arguments: [@service_container]
+            tags:
+                - { name: form.type, alias: bigfoot_bundle_contentbundle_widgettype}
+
+    kernel.listener.bigfoot_content_menu_listener:
+        class: Bigfoot\Bundle\ContentBundle\Listener\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: bigfoot.menu.generate, method: onMenuGenerate }

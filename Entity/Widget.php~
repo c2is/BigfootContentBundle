@@ -1,0 +1,238 @@
+<?php
+
+namespace Bigfoot\Bundle\ContentBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Widget
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Bigfoot\Bundle\ContentBundle\Entity\WidgetRepository")
+ */
+class Widget
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="actionController", type="string", length=255)
+     */
+    private $actionController;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="template", type="string", length=255)
+     */
+    private $template;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
+     * @var Sidebar $sidebar
+     *
+     * @ORM\ManyToOne(targetEntity="Sidebar", inversedBy="widget", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="sidebar_id", referencedColumnName="id")
+     */
+    private $sidebar;
+
+    /**
+     * @var ArrayCollection $widgetparameter
+     *
+     * @ORM\OneToMany(targetEntity="WidgetParameter", mappedBy="widget", cascade={"persist", "remove", "merge"})
+     */
+    private $widgetparameter;
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Widget
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set actionController
+     *
+     * @param string $actioNController
+     * @return Widget
+     */
+    public function setActionController($actionController)
+    {
+        $this->actionController = $actionController;
+    
+        return $this;
+    }
+
+    /**
+     * Get actionController
+     *
+     * @return string 
+     */
+    public function getActionController()
+    {
+        return $this->actionController;
+    }
+
+    /**
+     * Set template
+     *
+     * @param string $template
+     * @return Widget
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+    
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return string 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Widget
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set sidebar
+     *
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Sidebar $sidebar
+     * @return Widget
+     */
+    public function setSidebar(\Bigfoot\Bundle\ContentBundle\Entity\Sidebar $sidebar = null)
+    {
+        $this->sidebar = $sidebar;
+    
+        return $this;
+    }
+
+    /**
+     * Get sidebar
+     *
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Sidebar 
+     */
+    public function getSidebar()
+    {
+        return $this->sidebar;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->widgetparameter = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add widgetparameter
+     *
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\WidgetParameter $widgetparameter
+     * @return Widget
+     */
+    public function addWidgetparameter(\Bigfoot\Bundle\ContentBundle\Entity\WidgetParameter $widgetparameter)
+    {
+        $this->widgetparameter[] = $widgetparameter;
+    
+        return $this;
+    }
+
+    /**
+     * Remove widgetparameter
+     *
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\WidgetParameter $widgetparameter
+     */
+    public function removeWidgetparameter(\Bigfoot\Bundle\ContentBundle\Entity\WidgetParameter $widgetparameter)
+    {
+        $this->widgetparameter->removeElement($widgetparameter);
+    }
+
+    /**
+     * Get widgetparameter
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWidgetparameter()
+    {
+        return $this->widgetparameter;
+    }
+}

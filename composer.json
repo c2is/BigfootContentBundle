@@ -1,0 +1,21 @@
+{
+    "name": "bigfoot/content-bundle",
+    "type": "symfony-bundle",
+    "description": "Bigfoot Content bundle",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "S.Huot",
+            "email": "s.huot@c2is.fr"
+        }
+    ],
+    "require": {
+        "bigfoot/core-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Bigfoot\\Bundle\\ContentBundle": "" }
+    },
+    "target-dir": "Bigfoot/Bundle/ContentBundle",
+    "minimum-stability": "dev"
+}

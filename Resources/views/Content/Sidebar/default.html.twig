@@ -1,0 +1,9 @@
+{% for widget in widgets %}
+<div id="widget">
+    {% render url(widget.route, tabParameter[widget.id])  %}
+</div>
+{% endfor %}
+
+{% for staticcontent in staticcontents %}
+    {% render url("content_staticcontent",  {'staticcontent_id' : staticcontent.id}) %}
+{% endfor %}

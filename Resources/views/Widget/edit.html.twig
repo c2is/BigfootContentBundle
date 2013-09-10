@@ -1,0 +1,12 @@
+{% extends bigfoot_theme_values.bundle~'::base.html.twig' %}
+
+{% block body %}
+    {% include 'BigfootCoreBundle:crud:form.html.twig' with {
+    'action_route': path('admin_widget_update', { 'id': entity.id, 'form_name' : entity.form_name }),
+    'action_name': 'Edit',
+    'form_title': 'Widget edit',
+    'cancel_route': 'admin_widget',
+    'form': edit_form,
+    'method': 'PUT'
+    } %}
+{% endblock %}
