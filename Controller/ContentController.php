@@ -141,15 +141,15 @@ class ContentController extends Controller
      */
     public function createDynamicBlockAction(Request $request)
     {
-        if ($request->isXmlHttpRequest() && $request->get('type_block') && $request->get('id_sidebar') && $request->get('widget_name')) {
+        if ($request->isXmlHttpRequest() && $request->get('type_block') && $request->get('id_sidebar')) {
 
             $em = $this->getDoctrine()->getManager();
 
             $type_block = $request->get('type_block');
             $id_sidebar = $request->get('id_sidebar');
-            $widget_name = $request->get('widget_name');
 
             if ($type_block == 'widget') {
+                $widget_name = $request->get('widget_name');
                 $widget_name = $this->container->getParameter('bigfoot_content.widgets')[$widget_name];
                 $widgetTemp = new $widget_name;
                 $entity = new Widget();
