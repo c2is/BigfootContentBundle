@@ -41,7 +41,7 @@ class Sidebar
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active = false;
+    private $active = true;
 
     /**
      * @var ArrayCollection $staticcontent

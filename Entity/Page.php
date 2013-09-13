@@ -54,7 +54,7 @@ class Page
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active;
+    private $active = true;
 
 
     /**
