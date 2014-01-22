@@ -108,7 +108,7 @@ div#sidebar_container div#header_sidebar_container span {position:absolute;top:0
 
 div#body_sidebar_container {background-color:#fff;width:100%;min-height:100px;height:auto !important;height:100px;float:left;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;}
 
-div#sidebar_container div.sidebar_elt {width:80%;margin:10px auto;border:1px solid #ccc;}
+div#sidebar_container div.sidebar_elt {width:80%;margin:10px auto;border:1px solid #ccc;background-color:#fff;}
 
 div#sidebar_container div.header_sidebar_elt {
     background-color: #f8f8f8;
@@ -132,7 +132,8 @@ div#sidebar_container div.header_sidebar_elt {
 }
 
 div#sidebar_container div.header_sidebar_elt span {position:absolute;top:0;right:0;margin:5px 12px 0 0;}
-div#sidebar_container div.header_sidebar_elt span.glyphicon-pencil {margin:5px 30px 0 0;}
+div#sidebar_container div.header_sidebar_elt span.glyphicon-pencil,
+div#sidebar_container div.header_sidebar_elt span.glyphicon-edit {margin:5px 30px 0 0;}
 div#sidebar_container div.header_sidebar_elt span.glyphicon-magnet {margin:5px 87% 0 0;}
 
 div#sidebar_container div.body_sidebar_elt {background-color: #fff;min-height:50px;height:auto !important;height:50px;}
@@ -163,7 +164,8 @@ div#sidebar_container div.body_sidebar_elt div.form_widget_element div.header_fo
 
 div#sidebar_container div.body_sidebar_elt div.form_widget_element div.header_form_widget_element a {position:absolute;top:0;right:0;}
 div#sidebar_container div.body_sidebar_elt div.form_widget_element div.header_form_widget_element span {position:absolute;top:0;right:0;margin:5px 12px 0 0;}
-div#sidebar_container div.body_sidebar_elt div.form_widget_element div.header_form_widget_element span.glyphicon-pencil {margin:5px 30px 0 0;}
+div#sidebar_container div.body_sidebar_elt div.form_widget_element div.header_form_widget_element span.glyphicon-pencil,
+div#sidebar_container div.body_sidebar_elt div.form_widget_element div.header_form_widget_element span.glyphicon-edit {margin:5px 30px 0 0;}
 
 div#sidebar_container div.body_sidebar_elt div.form_widget_element div.body_form_widget_element {background-color: #fff;display:none;}
 div#sidebar_container div.body_sidebar_elt div.form_widget_element div.body_form_widget_element .sidebar_select {display:none;}
@@ -178,4 +180,45 @@ div#sidebar_container div.body_sidebar_elt div.form_widget_element div.body_form
     width:90%;margin-left:5%;
 }
 div#sidebar_container div.body_sidebar_elt div.form_widget_element div.body_form_widget_element div.form-group label[for="bigfoot_bundle_contentbundle_staticcontenttype_template"] {display:none;}
+
+div#sidebar_container div#sidebar_filter {width:95%;float:left;margin: 10px 0 10px 20px;}
+
+div#sidebar_container div.sidebar_category {
+    border: 1px solid #c9c9c9;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    margin: 10px 0 20px 20px;
+    width:95%;
+    float:left;
+}
+
+div#sidebar_container div.sidebar_category div.sidebar_category_header {
+    background-color: #f8f8f8;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f2f2f2));
+    background: -webkit-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: -moz-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: -ms-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: -o-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: linear-gradient(top, #f8f8f8, #f2f2f2);
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    text-shadow: 0px 1px #fff;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    color: #666;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 15px;
+    text-align:center;
+    position:relative;
+}
+
+div#sidebar_container div.sidebar_category div.sidebar_category_header span {position:absolute;top:0;right:0;margin:9px 12px 0 0;}
+
+div#sidebar_container div.sidebar_category div.sidebar_category_header span.glyphicon-pencil,
+div#sidebar_container div.sidebar_category div.sidebar_category_header span.glyphicon-edit {margin:9px 30px 0 0;}
+
+div#sidebar_container div.sidebar_category div.sidebar_category_body {background-color:#e2e0e0;width:100%;min-height:100px;height:auto !important;height:100px;float:left;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;}
 

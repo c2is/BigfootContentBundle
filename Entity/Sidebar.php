@@ -5,6 +5,7 @@ namespace Bigfoot\Bundle\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Bigfoot\Bundle\ContentBundle\Util\ContentManager;
 
 /**
  * Sidebar
@@ -72,6 +73,36 @@ class Sidebar
      * @Gedmo\Locale
      */
     protected $locale;
+
+    /**
+     * @var text
+     * @Gedmo\Translatable
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @var string
+     * @ORM\Column(name="thumbnail", type="string", length=255, nullable=true)
+     */
+    protected $thumbnail;
+
+    /**
+     * @var SidebarCategory
+     *
+     * @ORM\ManyToOne(targetEntity="SidebarCategory", inversedBy="sidebars", cascade={"persist"})
+     * @ORM\JoinColumn(name="sidebar_category_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $sidebarCategory;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->staticcontent = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->widget = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -156,14 +187,6 @@ class Sidebar
     {
         return $this->active;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->staticcontent = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->widget = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add staticcontent
@@ -207,30 +230,9 @@ class Sidebar
     public function getBlock()
     {
         $tabBlock = array_merge($this->staticcontent->toArray(), $this->widget->toArray());
-
-        Sidebar::aasort($tabBlock,"position");
+        ContentManager::aasort($tabBlock,"position");
 
         return new ArrayCollection($tabBlock);
-    }
-
-    /**
-     * Sort a multi array by key
-     *
-     * @param $array
-     * @param $key
-     */
-    public static function aasort (&$array, $key) {
-        $sorter=array();
-        $ret=array();
-        reset($array);
-        foreach ($array as $ii => $va) {
-            $sorter[$ii]=$va->{$key};
-        }
-        asort($sorter);
-        foreach ($sorter as $ii => $va) {
-            $ret[$ii]=$array[$ii];
-        }
-        $array=$ret;
     }
 
     /**
@@ -290,5 +292,61 @@ class Sidebar
         $this->locale = $locale;
 
         return $this;
+    }
+
+    /**
+     * @return Sidebar
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get Description
+     * @return text
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return Sidebar
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * Get Thumbnail
+     * @return text
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * @return Sidebar
+     */
+    public function setSidebarCategory($sidebarCategory)
+    {
+        $this->sidebarCategory = $sidebarCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return SidebarCategory
+     */
+    public function getSidebarCategory()
+    {
+        return $this->sidebarCategory;
     }
 }

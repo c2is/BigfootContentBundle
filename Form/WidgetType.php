@@ -9,19 +9,6 @@ use Doctrine\ORM\EntityRepository;
 
 class WidgetType extends AbstractType
 {
-
-    protected $container;
-
-    /**
-     * Constructor
-     *
-     * @param $container
-     */
-    public function __construct($container)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options

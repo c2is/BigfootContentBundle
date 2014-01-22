@@ -8,19 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BlockType extends AbstractType
 {
-
-    protected $container;
-
-    /**
-     * Constructor
-     *
-     * @param $container
-     */
-    public function __construct($container)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options

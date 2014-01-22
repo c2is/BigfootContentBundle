@@ -47,6 +47,16 @@ $(document).ready(function()
         });
     });
 
+    $('select#filterCategory').change(function(){
+        if ($(this).val() == '') {
+            $('div.sidebar_category:hidden').show();
+        }
+        else {
+            $('div.sidebar_category:visible').hide();
+            $('div#sidebar_category_' + $(this).val()).show();
+        }
+    });
+
 });
 
 

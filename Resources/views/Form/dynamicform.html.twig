@@ -1,7 +1,7 @@
 <div class="form_widget_element">
     <div class="header_form_widget_element">
         {{ form.vars.value.label }}
-        <a href="{{ action_path }}" class="colorbox"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a href="{{ action_path }}" class="colorbox"><span class="glyphicon glyphicon-pencil icon-pencil bigger-100"></span></a>
 
         {% if block_id is defined and block_type is defined %}
             {% if block_type == 'widget' %}
@@ -16,7 +16,7 @@
                data-confirm-message="{{ 'Are you sure you want to perform this action ? The object will be permanently lost.' | trans }}"
                data-confirm-button-cancel="{{ "Cancel" | trans }}"
                data-confirm-button-ok="{{ "Confirm" | trans }}">
-                <span class="glyphicon glyphicon-trash"></span></a>
+                <span class="glyphicon glyphicon-trash icon-trash bigger-100"></span></a>
         {% endif %}
 
     </div>

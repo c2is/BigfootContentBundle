@@ -10,30 +10,24 @@ parameters:
 services:
     bigfoot_content.template:
             class: '%bigfoot_content.template.class%'
-
     bigfoot_bundle_contentbundle_widgettype:
             class: '%bigfoot_content.widgettype.class%'
-            arguments: [@service_container]
             tags:
                 - { name: form.type, alias: bigfoot_bundle_contentbundle_widgettype}
     bigfoot_bundle_contentbundle_widgettesttype:
             class: '%bigfoot_content.widgettesttype.class%'
-            arguments: [@service_container]
             tags:
                 - { name: form.type, alias: bigfoot_bundle_contentbundle_widgettesttype}
     bigfoot_bundle_contentbundle_sidebartype:
             class: '%bigfoot_content.sidebartype.class%'
-            arguments: [@service_container]
             tags:
                 - { name: form.type, alias: bigfoot_bundle_contentbundle_sidebartype}
     bigfoot_bundle_contentbundle_pagetype:
             class: '%bigfoot_content.pagetype.class%'
-            arguments: [@service_container]
             tags:
                 - { name: form.type, alias: bigfoot_bundle_contentbundle_pagetype}
     bigfoot_bundle_contentbundle_staticcontenttype:
             class: '%bigfoot_content.staticcontenttype.class%'
-            arguments: [@service_container]
             tags:
                 - { name: form.type, alias: bigfoot_bundle_contentbundle_staticcontenttype}
     bigfoot_content.display_content:
