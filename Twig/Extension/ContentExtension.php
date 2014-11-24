@@ -27,7 +27,7 @@ class ContentExtension extends Twig_Extension
     /**
      * Construct ContentExtension
      */
-    public function __construct(Twig_Environment $twig, Router $router, EntityManager $entityManager)
+    public function __construct(Twig_Environment $twig, $router, EntityManager $entityManager)
     {
         $this->twig          = $twig;
         $this->router        = $router;
