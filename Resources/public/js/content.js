@@ -46,22 +46,21 @@ $(function() {
         } else if (responseText.status === 'new_block') {
             modal.modal('hide');
 
-            $('.widget-blocks').attr('data-prototype', responseText.content.prototype);
+            var newBlockOpt = '<option value="' + responseText.content.option.value + '">' + responseText.content.option.label + '</option>';
+            var $blocksPrototype = $(decodeEntities($('.widget-blocks').data('prototype')));
 
-            $('.admin_block_select').each(function (index) {
-                $(this).append('<option value="' + responseText.content.option.value + '">' + responseText.content.option.label + '</option>');
-            });
-
-            $('.admin_block_select').trigger("chosen:updated");
+            $('.admin_block_select').append(newBlockOpt).trigger('chosen:updated');
+            $('.admin_block_select', $blocksPrototype).append(newBlockOpt);
+            $('.widget-blocks').attr('data-prototype', $blocksPrototype.html());
         } else if (responseText.status === 'edit_block') {
             modal.modal('hide');
 
-            $('.widget-blocks').attr('data-prototype', responseText.content.prototype);
+            var $blocksPrototype = $(decodeEntities($('.widget-blocks').data('prototype')));
 
-            $('.admin_block_select > option[value="' + responseText.content.option.id + '"]').each(function (index) {
-                $(this).html(responseText.content.option.label);
-            });
+            $('.admin_block_select > option[value="' + responseText.content.option.id + '"]').html(responseText.content.option.label);
+            $('.admin_block_select > option[value="' + responseText.content.option.id + '"]', $blocksPrototype).html(responseText.content.option.label);
 
+            $('.widget-blocks').attr('data-prototype', $blocksPrototype.html());
             $('.admin_block_select').trigger("chosen:updated");
         } else {
             modal
@@ -72,3 +71,9 @@ $(function() {
         }
     }
 });
+
+function decodeEntities(encodedString) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = encodedString;
+    return textArea.value;
+}

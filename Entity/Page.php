@@ -286,6 +286,7 @@ class Page extends Content
     public function addBlock(PageBlock $block)
     {
         $this->blocks[] = $block;
+        $block->setPage($this);
 
         return $this;
     }
@@ -298,6 +299,7 @@ class Page extends Content
     public function removeBlock(PageBlock $block)
     {
         $this->blocks->removeElement($block);
+        $block->setPage(null);
 
         return $this;
     }
@@ -308,7 +310,13 @@ class Page extends Content
      */
     public function setBlocks($blocks)
     {
-        $this->blocks = $blocks;
+        foreach ($this->blocks as $block) {
+            $this->removeBlock($block);
+        }
+
+        foreach ($blocks as $block) {
+            $this->addBlock($block);
+        }
 
         return $this;
     }

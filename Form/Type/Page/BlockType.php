@@ -55,15 +55,6 @@ class BlockType extends AbstractType
                 )
             )
         ;
-
-        $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) use ($options) {
-                $form = $event->getForm();
-                $data = $event->getData();
-                $data->setPage($options['page']);
-            }
-        );
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
