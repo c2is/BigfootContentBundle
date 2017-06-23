@@ -191,31 +191,7 @@ class BlockController extends CrudController
                 $this->persistAndFlush($block);
 
                 if ($request->isXmlHttpRequest()) {
-                    $contentType = $request->query->get('contentType');
-                    $qTemplate   = $request->query->get('template');
-
-                    if (is_numeric($qTemplate)) {
-                        $qTemplate = $this->getRepository('BigfootContentBundle:' . ucfirst($contentType))->find($qTemplate)->getSlugTemplate();
-                    }
-
-                    $pTemplate     = $this->getParentTemplate($qTemplate);
-                    $templates     = $this->getTemplates($contentType, $pTemplate);
-                    $contentEntity = $templates['class'];
-                    $contentEntity = new $contentEntity();
-
-                    $contentForm = $this->createForm(
-                        $contentEntity->getTypeClass(),
-                        $contentEntity,
-                        array(
-                            'template'  => $qTemplate,
-                            'templates' => $templates
-                        )
-                    );
-
-                    $prototype = $this->renderView('BigfootContentBundle:' . ucfirst($contentType) . ':Block/prototype.html.twig', array('form' => $contentForm->createView()));
-
                     $content = array(
-                        'prototype' => $prototype,
                         'option'    => array(
                             'id'    => $block->getId(),
                             'label' => $block->getName() . ' - ' . $block->getParentTemplate(),
