@@ -32,6 +32,10 @@ $(function() {
                 contentType = 'sidebar';
             }
 
+            for(var instanceName in CKEDITOR.instances) {
+                CKEDITOR.instances[instanceName].updateElement();
+            }
+
             form
                 .attr('action', action + '?layout=_blank&contentType=' + contentType + '&template=' + template)
                 .ajaxSubmit(options);
