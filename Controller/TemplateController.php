@@ -103,7 +103,7 @@ class TemplateController extends BaseController
         return $templates[$parent];
     }
 
-    public function renderForm($request, $contentType, $template, $request)
+    public function renderForm($request, $contentType, $template)
     {
         $contentForm = $this->getContentForm($contentType, $template);
         $action      = $this->generateUrl('admin_'.$contentType.'_new', array('template' => $template));
