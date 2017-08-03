@@ -5,6 +5,7 @@ namespace Bigfoot\Bundle\ContentBundle\Form\Type\Sidebar\Template;
 use Bigfoot\Bundle\ContentBundle\Entity\Attribute;
 use Bigfoot\Bundle\ContentBundle\Form\Type\BlocksType;
 use Bigfoot\Bundle\ContentBundle\Form\Type\Page\SidebarType;
+use Bigfoot\Bundle\ContentBundle\Form\Type\Sidebar\BlockType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -76,7 +77,7 @@ class TitleDescBlockType extends AbstractType
                     'prototype'     => true,
                     'allow_add'     => true,
                     'allow_delete'  => true,
-                    'entry_type'    => SidebarType::class,
+                    'entry_type'    => BlockType::class,
                     'entry_options' => array(
                         'sidebar'    => $options['data'],
                         'data_class' => 'Bigfoot\Bundle\ContentBundle\Entity\Sidebar\Block',
