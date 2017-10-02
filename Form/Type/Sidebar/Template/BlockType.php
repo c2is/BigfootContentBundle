@@ -3,6 +3,7 @@
 namespace Bigfoot\Bundle\ContentBundle\Form\Type\Sidebar\Template;
 
 use Bigfoot\Bundle\ContentBundle\Entity\Attribute;
+use Bigfoot\Bundle\ContentBundle\Form\Type\BlocksType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

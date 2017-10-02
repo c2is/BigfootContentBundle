@@ -82,72 +82,82 @@ class Page extends Content
     protected $seoDescription;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $blocks;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block2", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block2", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $blocks2;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block3", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block3", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $blocks3;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block4", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block4", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $blocks4;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block5", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block5", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $blocks5;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $sidebars;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $sidebars2;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $sidebars3;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $sidebars4;
 
     /**
-     * @var ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
      *
-     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position"="ASC"})
      */
     private $sidebars5;
 
@@ -278,34 +288,38 @@ class Page extends Content
     }
 
     /**
-     * Add block
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block $block
      *
-     * @param PageBlock $block
      * @return $this
      */
     public function addBlock(PageBlock $block)
     {
-        $this->blocks[] = $block;
-        $block->setPage($this);
+        if (!$this->blocks->contains($block)) {
+            $this->blocks->add($block);
+            $block->setPage($this);
+        }
 
         return $this;
     }
 
     /**
-     * Remove block
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block $block
      *
-     * @param PageBlock $block
+     * @return $this
      */
     public function removeBlock(PageBlock $block)
     {
-        $this->blocks->removeElement($block);
-        $block->setPage(null);
+        if ($this->blocks->contains($block)) {
+            $this->blocks->removeElement($block);
+            $block->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $blocks
+     * @param $blocks
+     *
      * @return $this
      */
     public function setBlocks($blocks)
@@ -322,529 +336,515 @@ class Page extends Content
     }
 
     /**
-     * Get blocks
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getBlocks()
     {
-        $blocks = array();
+        return $this->blocks;
+    }
 
-        foreach ($this->blocks as $key => $block) {
-            $blocks[$block->getPosition()] = $block;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block2 $block
+     *
+     * @return $this
+     */
+    public function addBlock2(PageBlock2 $block)
+    {
+        if (!$this->blocks2->contains($block)) {
+            $this->blocks2->add($block);
+            $block->setPage($this);
         }
 
-        ksort($blocks);
-
-        $blocks = new ArrayCollection($blocks);
-
-        return $blocks;
+        return $this;
     }
 
     /**
-     * Add block2
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block2 $block
      *
-     * @param PageBlock2 $block2
      * @return $this
      */
-    public function addBlock2(PageBlock2 $block2)
+    public function removeBlock2(PageBlock2 $block)
     {
-        $this->blocks2[] = $block2;
+        if ($this->blocks2->contains($block)) {
+            $this->blocks2->removeElement($block);
+            $block->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove block2
+     * @param $blocks
      *
-     * @param PageBlock2 $block2
      * @return $this
      */
-    public function removeBlock2(PageBlock2 $block2)
+    public function setBlocks2($blocks)
     {
-        $this->blocks2->removeElement($block2);
+        foreach ($this->blocks2 as $block) {
+            $this->removeBlock2($block);
+        }
+
+        foreach ($blocks as $block) {
+            $this->addBlock2($block);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $blocks2
-     * @return $this
-     */
-    public function setBlocks2($blocks2)
-    {
-        $this->blocks2 = $blocks2;
-
-        return $this;
-    }
-
-    /**
-     * Get blocks2
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     * @return $this
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getBlocks2()
     {
-        $blocks = array();
+        return $this->blocks2;
+    }
 
-        foreach ($this->blocks2 as $key => $block) {
-            $blocks[$block->getPosition()] = $block;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block3 $block
+     *
+     * @return $this
+     */
+    public function addBlock3(PageBlock3 $block)
+    {
+        if (!$this->blocks3->contains($block)) {
+            $this->blocks3->add($block);
+            $block->setPage($this);
         }
 
-        ksort($blocks);
-
-        $blocks = new ArrayCollection($blocks);
-
-        return $blocks;
+        return $this;
     }
 
     /**
-     * Add block3
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block3 $block
      *
-     * @param PageBlock3 $block3
      * @return $this
      */
-    public function addBlock3(PageBlock3 $block3)
+    public function removeBlock3(PageBlock3 $block)
     {
-        $this->blocks3[] = $block3;
+        if ($this->blocks3->contains($block)) {
+            $this->blocks3->removeElement($block);
+            $block->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove block3
+     * @param $blocks
      *
-     * @param PageBlock3 $block3
      * @return $this
      */
-    public function removeBlock3(PageBlock3 $block3)
+    public function setBlocks3($blocks)
     {
-        $this->blocks3->removeElement($block3);
+        foreach ($this->blocks3 as $block) {
+            $this->removeBlock3($block);
+        }
+
+        foreach ($blocks as $block) {
+            $this->addBlock3($block);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $blocks3
-     * @return $this
-     */
-    public function setBlocks3($blocks3)
-    {
-        $this->blocks3 = $blocks3;
-
-        return $this;
-    }
-
-    /**
-     * Get blocks3
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     * @return $this
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getBlocks3()
     {
-        $blocks = array();
+        return $this->blocks3;
+    }
 
-        foreach ($this->blocks3 as $key => $block) {
-            $blocks[$block->getPosition()] = $block;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block4 $block
+     *
+     * @return $this
+     */
+    public function addBlock4(PageBlock4 $block)
+    {
+        if (!$this->blocks4->contains($block)) {
+            $this->blocks4->add($block);
+            $block->setPage($this);
         }
 
-        ksort($blocks);
-
-        $blocks = new ArrayCollection($blocks);
-
-        return $blocks;
+        return $this;
     }
 
     /**
-     * Add block4
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block4 $block
      *
-     * @param PageBlock4 $block4
      * @return $this
      */
-    public function addBlock4(PageBlock4 $block4)
+    public function removeBlock4(PageBlock4 $block)
     {
-        $this->blocks4[] = $block4;
+        if ($this->blocks4->contains($block)) {
+            $this->blocks4->removeElement($block);
+            $block->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove block4
+     * @param $blocks
      *
-     * @param PageBlock4 $block4
      * @return $this
      */
-    public function removeBlock4(PageBlock4 $block4)
+    public function setBlocks4($blocks)
     {
-        $this->blocks4->removeElement($block4);
+        foreach ($this->blocks4 as $block) {
+            $this->removeBlock4($block);
+        }
+
+        foreach ($blocks as $block) {
+            $this->addBlock4($block);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $blocks4
-     * @return $this
-     */
-    public function setBlocks4($blocks4)
-    {
-        $this->blocks4 = $blocks4;
-
-        return $this;
-    }
-
-    /**
-     * Get blocks4
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getBlocks4()
     {
-        $blocks = array();
+        return $this->blocks4;
+    }
 
-        foreach ($this->blocks4 as $key => $block) {
-            $blocks[$block->getPosition()] = $block;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block5 $block
+     *
+     * @return $this
+     */
+    public function addBlock5(PageBlock5 $block)
+    {
+        if (!$this->blocks5->contains($block)) {
+            $this->blocks5->add($block);
+            $block->setPage($this);
         }
 
-        ksort($blocks);
-
-        $blocks = new ArrayCollection($blocks);
-
-        return $blocks;
+        return $this;
     }
 
     /**
-     * Add block5
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Block5 $block
      *
-     * @param PageBlock5 $block5
      * @return $this
      */
-    public function addBlock5(PageBlock5 $block5)
+    public function removeBlock5(PageBlock5 $block)
     {
-        $this->blocks5[] = $block5;
+        if ($this->blocks5->contains($block)) {
+            $this->blocks5->removeElement($block);
+            $block->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove block5
+     * @param $blocks
      *
-     * @param PageBlock5 $block5
      * @return $this
      */
-    public function removeBlock5(PageBlock5 $block5)
+    public function setBlocks5($blocks)
     {
-        $this->blocks5->removeElement($block5);
+        foreach ($this->blocks5 as $block) {
+            $this->removeBlock5($block);
+        }
+
+        foreach ($blocks as $block) {
+            $this->addBlock5($block);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $blocks5
-     * @return $this
-     */
-    public function setBlocks5($blocks5)
-    {
-        $this->blocks5 = $blocks5;
-
-        return $this;
-    }
-
-    /**
-     * Get blocks5
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getBlocks5()
     {
-        $blocks = array();
-
-        foreach ($this->blocks5 as $key => $block) {
-            $blocks[$block->getPosition()] = $block;
-        }
-
-        ksort($blocks);
-
-        $blocks = new ArrayCollection($blocks);
-
-        return $blocks;
+        return $this->blocks5;
     }
 
     /**
-     * Add sidebar
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar $sidebar
      *
-     * @param PageSidebar $sidebar
      * @return $this
      */
     public function addSidebar(PageSidebar $sidebar)
     {
-        $this->sidebars[] = $sidebar;
+        if (!$this->sidebars->contains($sidebar)) {
+            $this->sidebars->add($sidebar);
+            $sidebar->setPage($this);
+        }
 
         return $this;
     }
 
     /**
-     * Remove sidebar
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar $sidebar
      *
-     * @param PageSidebar $sidebar
      * @return $this
      */
     public function removeSidebar(PageSidebar $sidebar)
     {
-        $this->sidebars->removeElement($sidebar);
+        if ($this->sidebars->contains($sidebar)) {
+            $this->sidebars->removeElement($sidebar);
+            $sidebar->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sidebars
+     * @param $sidebars
+     *
      * @return $this
      */
     public function setSidebars($sidebars)
     {
-        $this->sidebars = $sidebars;
+        foreach ($this->sidebars as $sidebar) {
+            $this->removeSidebar($sidebar);
+        }
+
+        foreach ($sidebars as $sidebar) {
+            $this->addSidebar($sidebar);
+        }
 
         return $this;
     }
 
     /**
-     * Get sidebars
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars()
     {
-        $sidebars = array();
+        return $this->sidebars;
+    }
 
-        foreach ($this->sidebars as $key => $sidebar) {
-            $sidebars[$sidebar->getPosition()] = $sidebar;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2 $sidebar
+     *
+     * @return $this
+     */
+    public function addSidebar2(PageSidebar2 $sidebar)
+    {
+        if (!$this->sidebars2->contains($sidebar)) {
+            $this->sidebars2->add($sidebar);
+            $sidebar->setPage($this);
         }
 
-        ksort($sidebars);
-
-        $sidebars = new ArrayCollection($sidebars);
-
-        return $sidebars;
+        return $this;
     }
 
     /**
-     * Add sidebars2
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2 $sidebar
      *
-     * @param PageSidebar2 $sidebars2
      * @return $this
      */
-    public function addSidebar2(PageSidebar2 $sidebars2)
+    public function removeSidebar2(PageSidebar2 $sidebar)
     {
-        $this->sidebars2[] = $sidebars2;
+        if ($this->sidebars2->contains($sidebar)) {
+            $this->sidebars2->removeElement($sidebar);
+            $sidebar->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove sidebars2
+     * @param $sidebars
      *
-     * @param PageSidebar2 $sidebars2
-     */
-    public function removeSidebar2(PageSidebar2 $sidebars2)
-    {
-        $this->sidebars2->removeElement($sidebars2);
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sidebars2
      * @return $this
      */
-    public function setSidebars2($sidebars2)
+    public function setSidebars2($sidebars)
     {
-        $this->sidebars2 = $sidebars2;
+        foreach ($this->sidebars2 as $sidebar) {
+            $this->removeSidebar2($sidebar);
+        }
+
+        foreach ($sidebars as $sidebar) {
+            $this->addSidebar2($sidebar);
+        }
 
         return $this;
     }
 
     /**
-     * Get sidebars2
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars2()
     {
-        $sidebars = array();
+        return $this->sidebars2;
+    }
 
-        foreach ($this->sidebars2 as $key => $sidebar) {
-            $sidebars[$sidebar->getPosition()] = $sidebar;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3 $sidebar
+     *
+     * @return $this
+     */
+    public function addSidebar3(PageSidebar3 $sidebar)
+    {
+        if (!$this->sidebars3->contains($sidebar)) {
+            $this->sidebars3->add($sidebar);
+            $sidebar->setPage($this);
         }
 
-        ksort($sidebars);
-
-        $sidebars = new ArrayCollection($sidebars);
-
-        return $sidebars;
+        return $this;
     }
 
     /**
-     * Add sidebars3
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3 $sidebar
      *
-     * @param PageSidebar3 $sidebars3
      * @return $this
      */
-    public function addSidebar3(PageSidebar3 $sidebars3)
+    public function removeSidebar3(PageSidebar3 $sidebar)
     {
-        $this->sidebars3[] = $sidebars3;
+        if ($this->sidebars3->contains($sidebar)) {
+            $this->sidebars3->removeElement($sidebar);
+            $sidebar->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove sidebars3
+     * @param $sidebars
      *
-     * @param PageSidebar3 $sidebars3
-     */
-    public function removeSidebar3(PageSidebar3 $sidebars3)
-    {
-        $this->sidebars3->removeElement($sidebars3);
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sidebars3
      * @return $this
      */
-    public function setSidebars3($sidebars3)
+    public function setSidebars3($sidebars)
     {
-        $this->sidebars3 = $sidebars3;
+        foreach ($this->sidebars3 as $sidebar) {
+            $this->removeSidebar3($sidebar);
+        }
+
+        foreach ($sidebars as $sidebar) {
+            $this->addSidebar3($sidebar);
+        }
 
         return $this;
     }
 
     /**
-     * Get sidebars3
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars3()
     {
-        $sidebars = array();
+        return $this->sidebars3;
+    }
 
-        foreach ($this->sidebars3 as $key => $sidebar) {
-            $sidebars[$sidebar->getPosition()] = $sidebar;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4 $sidebar
+     *
+     * @return $this
+     */
+    public function addSidebar4(PageSidebar4 $sidebar)
+    {
+        if (!$this->sidebars4->contains($sidebar)) {
+            $this->sidebars4->add($sidebar);
+            $sidebar->setPage($this);
         }
 
-        ksort($sidebars);
-
-        $sidebars = new ArrayCollection($sidebars);
-
-        return $sidebars;
+        return $this;
     }
 
     /**
-     * Add sidebars4
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4 $sidebar
      *
-     * @param PageSidebar4 $sidebars4
      * @return $this
      */
-    public function addSidebar4(PageSidebar4 $sidebars4)
+    public function removeSidebar4(PageSidebar4 $sidebar)
     {
-        $this->sidebars4[] = $sidebars4;
+        if ($this->sidebars4->contains($sidebar)) {
+            $this->sidebars4->removeElement($sidebar);
+            $sidebar->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove sidebars4
+     * @param $sidebars
      *
-     * @param PageSidebar4 $sidebars4
-     */
-    public function removeSidebar4(PageSidebar4 $sidebars4)
-    {
-        $this->sidebars4->removeElement($sidebars4);
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sidebars4
      * @return $this
      */
-    public function setSidebars4($sidebars4)
+    public function setSidebars4($sidebars)
     {
-        $this->sidebars4 = $sidebars4;
+        foreach ($this->sidebars4 as $sidebar) {
+            $this->removeSidebar4($sidebar);
+        }
+
+        foreach ($sidebars as $sidebar) {
+            $this->addSidebar4($sidebar);
+        }
 
         return $this;
     }
 
     /**
-     * Get sidebars4
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars4()
     {
-        $sidebars = array();
+        return $this->sidebars4;
+    }
 
-        foreach ($this->sidebars4 as $key => $sidebar) {
-            $sidebars[$sidebar->getPosition()] = $sidebar;
+    /**
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5 $sidebar
+     *
+     * @return $this
+     */
+    public function addSidebar5(PageSidebar5 $sidebar)
+    {
+        if (!$this->sidebars5->contains($sidebar)) {
+            $this->sidebars5->add($sidebar);
+            $sidebar->setPage($this);
         }
 
-        ksort($sidebars);
-
-        $sidebars = new ArrayCollection($sidebars);
-
-        return $sidebars;
+        return $this;
     }
 
     /**
-     * Add sidebars5
+     * @param \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5 $sidebar
      *
-     * @param PageSidebar5 $sidebars5
      * @return $this
      */
-    public function addSidebar5(PageSidebar5 $sidebars5)
+    public function removeSidebar5(PageSidebar5 $sidebar)
     {
-        $this->sidebars5[] = $sidebars5;
+        if ($this->sidebars5->contains($sidebar)) {
+            $this->sidebars5->removeElement($sidebar);
+            $sidebar->setPage(null);
+        }
 
         return $this;
     }
 
     /**
-     * Remove sidebars5
+     * @param $sidebars
      *
-     * @param PageSidebar5 $sidebars5
      * @return $this
      */
-    public function removeSidebar5(PageSidebar5 $sidebars5)
+    public function setSidebars5($sidebars)
     {
-        $this->sidebars5->removeElement($sidebars5);
+        foreach ($this->sidebars5 as $sidebar) {
+            $this->removeSidebar5($sidebar);
+        }
+
+        foreach ($sidebars as $sidebar) {
+            $this->addSidebar5($sidebar);
+        }
 
         return $this;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sidebars5
-     * @return $this
-     */
-    public function setSidebars5($sidebars5)
-    {
-        $this->sidebars5 = $sidebars5;
-
-        return $this;
-    }
-
-    /**
-     * Get sidebars5
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars5()
     {
-        $sidebars = array();
-
-        foreach ($this->sidebars5 as $key => $sidebar) {
-            $sidebars[$sidebar->getPosition()] = $sidebar;
-        }
-
-        ksort($sidebars);
-
-        $sidebars = new ArrayCollection($sidebars);
-
-        return $sidebars;
+        return $this->sidebars5;
     }
 
     /**

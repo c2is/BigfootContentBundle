@@ -2,23 +2,24 @@
 
 namespace Bigfoot\Bundle\ContentBundle\Form\Type\Page;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class SidebarType
+ * @package Bigfoot\Bundle\ContentBundle\Form\Type\Page
+ */
 class SidebarType extends AbstractType
 {
+    /** @var array */
     protected $templates;
 
     /**
-     * Construct Block Type
-     *
-     * @param string $templates
+     * @param array $templates
      */
     public function __construct($templates)
     {
@@ -27,7 +28,7 @@ class SidebarType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,43 +36,39 @@ class SidebarType extends AbstractType
             ->add(
                 'sidebar',
                 EntityType::class,
-                array(
+                [
                     'class'         => 'Bigfoot\Bundle\ContentBundle\Entity\Sidebar',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('s')->orderBy('s.name', 'ASC');
-                    }
-                )
+                    },
+                ]
             )
             ->add('position')
             ->add(
                 'template',
                 ChoiceType::class,
-                array(
+                [
                     'required'          => true,
                     'expanded'          => true,
                     'multiple'          => false,
                     'choices_as_values' => true,
-                    'choices'           => array_flip($this->toStringTemplates($this->templates))
-                )
+                    'choices'           => array_flip($this->toStringTemplates($this->templates)),
+                ]
             );
-
-        $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) use ($options) {
-                $form = $event->getForm();
-                $data = $event->getData();
-                $data->setPage($options['page']);
-            }
-        );
     }
 
-    public function toStringTemplates($templates)
+    /**
+     * @param array $templates
+     *
+     * @return array
+     */
+    public function toStringTemplates(array $templates)
     {
-        $nTemplates = array();
+        $nTemplates = [];
 
         foreach ($templates as $key => $template) {
             foreach ($template['sub_templates'] as $subTemplates => $label) {
-                $nTemplates[$key . '/' . $subTemplates] = $label;
+                $nTemplates[$key.'/'.$subTemplates] = $label;
             }
         }
 
@@ -86,11 +83,9 @@ class SidebarType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => 'Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar',
-                'page'       => '',
-                'sidebar'    => ''
-            )
+            ]
         );
     }
 

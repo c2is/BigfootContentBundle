@@ -169,59 +169,10 @@ class PageController extends CrudController
             )
         );
 
-        $dbBlocks    = new ArrayCollection();
-        $dbBlocks2   = new ArrayCollection();
-        $dbBlocks3   = new ArrayCollection();
-        $dbBlocks4   = new ArrayCollection();
-        $dbBlocks5   = new ArrayCollection();
-        $dbSidebars  = new ArrayCollection();
-        $dbSidebars2 = new ArrayCollection();
-        $dbSidebars3 = new ArrayCollection();
-        $dbSidebars4 = new ArrayCollection();
-        $dbSidebars5 = new ArrayCollection();
-
-        for ($i = 1; $i <= 5; $i++) {
-            $j = ($i > 1) ? $i : '';
-
-            foreach ($page->{'getBlocks' . $j}() as ${'block' . $j}) {
-                ${'dbBlocks' . $j}->add(${'block' . $j});
-            }
-        }
-
-        for ($i = 1; $i <= 5; $i++) {
-            $j = ($i > 1) ? $i : '';
-
-            foreach ($page->{'getSidebars' . $j}() as ${'sidebar' . $j}) {
-                ${'dbSidebars' . $j}->add(${'sidebar' . $j});
-            }
-        }
-
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                for ($i = 1; $i <= 5; $i++) {
-                    $j = ($i > 1) ? $i : '';
-
-                    foreach (${'dbBlocks' . $j} as ${'block' . $j}) {
-                        if ($page->{'getBlocks' . $j}()->contains(${'block' . $j}) === false) {
-                            $page->{'getBlocks' . $j}()->removeElement(${'block' . $j});
-                            $this->getEntityManager()->remove(${'block' . $j});
-                        }
-                    }
-                }
-
-                for ($i = 1; $i <= 5; $i++) {
-                    $j = ($i > 1) ? $i : '';
-
-                    foreach (${'dbSidebars' . $j} as ${'sidebar' . $j}) {
-                        if ($page->{'getSidebars' . $j}()->contains(${'sidebar' . $j}) === false) {
-                            $page->{'getSidebars' . $j}()->removeElement(${'sidebar' . $j});
-                            $this->getEntityManager()->remove(${'sidebar' . $j});
-                        }
-                    }
-                }
-
                 $this->persistAndFlush($page);
 
                 $this->addSuccessFlash(
