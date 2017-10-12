@@ -2,6 +2,7 @@
 
 namespace Bigfoot\Bundle\ContentBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -90,7 +91,7 @@ class Page extends Content
     private $blocks;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block2[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block2", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -98,7 +99,7 @@ class Page extends Content
     private $blocks2;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block3[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block3", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -106,7 +107,7 @@ class Page extends Content
     private $blocks3;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block4[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block4", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -114,7 +115,7 @@ class Page extends Content
     private $blocks4;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block5[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block5", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -130,7 +131,7 @@ class Page extends Content
     private $sidebars;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -138,7 +139,7 @@ class Page extends Content
     private $sidebars2;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -146,7 +147,7 @@ class Page extends Content
     private $sidebars3;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -154,7 +155,7 @@ class Page extends Content
     private $sidebars4;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position"="ASC"})
@@ -324,8 +325,18 @@ class Page extends Content
      */
     public function setBlocks($blocks)
     {
+        if (!(is_array($blocks) || $blocks instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($blocks)) {
+            $blocks = new ArrayCollection($blocks);
+        }
+
         foreach ($this->blocks as $block) {
-            $this->removeBlock($block);
+            if (!$blocks->contains($block)) {
+                $this->removeBlock($block);
+            }
         }
 
         foreach ($blocks as $block) {
@@ -380,8 +391,18 @@ class Page extends Content
      */
     public function setBlocks2($blocks)
     {
+        if (!(is_array($blocks) || $blocks instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($blocks)) {
+            $blocks = new ArrayCollection($blocks);
+        }
+
         foreach ($this->blocks2 as $block) {
-            $this->removeBlock2($block);
+            if (!$blocks->contains($block)) {
+                $this->removeBlock2($block);
+            }
         }
 
         foreach ($blocks as $block) {
@@ -436,8 +457,18 @@ class Page extends Content
      */
     public function setBlocks3($blocks)
     {
+        if (!(is_array($blocks) || $blocks instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($blocks)) {
+            $blocks = new ArrayCollection($blocks);
+        }
+
         foreach ($this->blocks3 as $block) {
-            $this->removeBlock3($block);
+            if (!$blocks->contains($block)) {
+                $this->removeBlock3($block);
+            }
         }
 
         foreach ($blocks as $block) {
@@ -492,8 +523,18 @@ class Page extends Content
      */
     public function setBlocks4($blocks)
     {
+        if (!(is_array($blocks) || $blocks instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($blocks)) {
+            $blocks = new ArrayCollection($blocks);
+        }
+
         foreach ($this->blocks4 as $block) {
-            $this->removeBlock4($block);
+            if (!$blocks->contains($block)) {
+                $this->removeBlock4($block);
+            }
         }
 
         foreach ($blocks as $block) {
@@ -548,8 +589,18 @@ class Page extends Content
      */
     public function setBlocks5($blocks)
     {
+        if (!(is_array($blocks) || $blocks instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($blocks)) {
+            $blocks = new ArrayCollection($blocks);
+        }
+
         foreach ($this->blocks5 as $block) {
-            $this->removeBlock5($block);
+            if (!$blocks->contains($block)) {
+                $this->removeBlock5($block);
+            }
         }
 
         foreach ($blocks as $block) {
@@ -604,8 +655,18 @@ class Page extends Content
      */
     public function setSidebars($sidebars)
     {
+        if (!(is_array($sidebars) || $sidebars instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($sidebars)) {
+            $sidebars = new ArrayCollection($sidebars);
+        }
+
         foreach ($this->sidebars as $sidebar) {
-            $this->removeSidebar($sidebar);
+            if (!$sidebars->contains($sidebar)) {
+                $this->removeSidebar($sidebar);
+            }
         }
 
         foreach ($sidebars as $sidebar) {
@@ -660,8 +721,18 @@ class Page extends Content
      */
     public function setSidebars2($sidebars)
     {
+        if (!(is_array($sidebars) || $sidebars instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($sidebars)) {
+            $sidebars = new ArrayCollection($sidebars);
+        }
+
         foreach ($this->sidebars2 as $sidebar) {
-            $this->removeSidebar2($sidebar);
+            if (!$sidebars->contains($sidebar)) {
+                $this->removeSidebar2($sidebar);
+            }
         }
 
         foreach ($sidebars as $sidebar) {
@@ -672,7 +743,7 @@ class Page extends Content
     }
 
     /**
-     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar2[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars2()
     {
@@ -716,8 +787,18 @@ class Page extends Content
      */
     public function setSidebars3($sidebars)
     {
+        if (!(is_array($sidebars) || $sidebars instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($sidebars)) {
+            $sidebars = new ArrayCollection($sidebars);
+        }
+
         foreach ($this->sidebars3 as $sidebar) {
-            $this->removeSidebar3($sidebar);
+            if (!$sidebars->contains($sidebar)) {
+                $this->removeSidebar3($sidebar);
+            }
         }
 
         foreach ($sidebars as $sidebar) {
@@ -728,7 +809,7 @@ class Page extends Content
     }
 
     /**
-     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar3[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars3()
     {
@@ -772,8 +853,18 @@ class Page extends Content
      */
     public function setSidebars4($sidebars)
     {
+        if (!(is_array($sidebars) || $sidebars instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($sidebars)) {
+            $sidebars = new ArrayCollection($sidebars);
+        }
+
         foreach ($this->sidebars4 as $sidebar) {
-            $this->removeSidebar4($sidebar);
+            if (!$sidebars->contains($sidebar)) {
+                $this->removeSidebar4($sidebar);
+            }
         }
 
         foreach ($sidebars as $sidebar) {
@@ -784,7 +875,7 @@ class Page extends Content
     }
 
     /**
-     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar4[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars4()
     {
@@ -828,8 +919,18 @@ class Page extends Content
      */
     public function setSidebars5($sidebars)
     {
+        if (!(is_array($sidebars) || $sidebars instanceof Collection)) {
+            return $this;
+        }
+
+        if (is_array($sidebars)) {
+            $sidebars = new ArrayCollection($sidebars);
+        }
+
         foreach ($this->sidebars5 as $sidebar) {
-            $this->removeSidebar5($sidebar);
+            if (!$sidebars->contains($sidebar)) {
+                $this->removeSidebar5($sidebar);
+            }
         }
 
         foreach ($sidebars as $sidebar) {
@@ -840,7 +941,7 @@ class Page extends Content
     }
 
     /**
-     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar[]|\Doctrine\Common\Collections\ArrayCollection
+     * @return \Bigfoot\Bundle\ContentBundle\Entity\Page\Sidebar5[]|\Doctrine\Common\Collections\ArrayCollection
      */
     public function getSidebars5()
     {
