@@ -79,7 +79,8 @@ $(function() {
         event.preventDefault();
 
         var currentSidebar = $(this)
-            .closest('li')
+            .closest('.sidebar-form-widget')
+            .parent('.form-group')
             .remove();
     });
 
