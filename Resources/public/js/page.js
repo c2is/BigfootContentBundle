@@ -6,12 +6,12 @@ $(function() {
     $('.sidebar-accordion')
         .accordion({
             collapsible: true,
-            header:      '> li > h3'
+            header:      '> .sidebar-form-widget > h3'
         })
         .sortable({
             handle: 'h3',
             stop: function( event, ui ) {
-                ui.item.children('li').triggerHandler('focusout');
+                ui.item.children('.sidebar-form-widget').triggerHandler('focusout');
 
                 orderSidebars();
             }
@@ -33,7 +33,7 @@ $(function() {
         event.preventDefault();
 
         var sidebarCount = containerSidebar
-            .find('li')
+            .find('.sidebar-form-widget')
             .length;
 
         prototypeSidebar = $(this).closest('.panel').find('.widget-sidebars').attr('data-prototype');
@@ -44,7 +44,7 @@ $(function() {
         $(".chosen-select").chosen();
 
         var
-            lastSidebar = containerSidebar.find('li:last'),
+            lastSidebar = containerSidebar.find('.sidebar-form-widget:last'),
             sidebars    = containerSidebar.find('.admin_sidebar_select');
 
         handleSidebarTemplates(sidebars);
@@ -58,12 +58,12 @@ $(function() {
         $('.sidebar-accordion')
             .accordion({
                 collapsible: true,
-                header:      '> li > h3'
+                header:      '> .sidebar-form-widget > h3'
             })
             .sortable({
                 handle: 'h3',
                 stop: function( event, ui ) {
-                    ui.item.children('li').triggerHandler('focusout');
+                    ui.item.children('.sidebar-form-widget').triggerHandler('focusout');
 
                     orderSidebars();
                 }
