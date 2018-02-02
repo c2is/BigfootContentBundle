@@ -52,7 +52,6 @@ class Page extends Content
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @Gedmo\Translatable
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
