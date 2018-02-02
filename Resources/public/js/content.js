@@ -19,10 +19,10 @@ $(function() {
             var
                 pathname    = window.location.pathname.split('/'),
                 contentType = null;
-                template    = pathname[pathname.length-1].trim(),
+            template    = pathname[pathname.length-1].trim(),
                 form        = $(this)
                     .closest('.modal')
-                        .find('form');
+                    .find('form');
 
             var action = form.attr('action');
 
@@ -50,7 +50,7 @@ $(function() {
         } else if (responseText.status === 'new_block') {
             modal.modal('hide');
 
-            var newBlockOpt = '<option value="' + responseText.content.option.value + '">' + responseText.content.option.label + '</option>';
+            var newBlockOpt = '<option value="' + responseText.content.option.value + '" data-block-type="'+responseText.content.option.type+'">' + responseText.content.option.label + '</option>';
             var $blocksPrototype = $(decodeEntities($('.widget-blocks').data('prototype')));
 
             $('.admin_block_select').append(newBlockOpt).trigger('chosen:updated');

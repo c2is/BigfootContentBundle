@@ -43,7 +43,7 @@ $(function() {
 
         var containerBlock = $(this)
             .closest('.collection-container')
-                .find('.widget-blocks');
+            .find('.widget-blocks');
 
         var
             prototypeBlock = containerBlock.attr('data-prototype'),
@@ -71,9 +71,9 @@ $(function() {
 
         $(this)
             .closest('.collection-container')
-                .find('.templates-container:last')
-                    .find('label.is-shown:first > input')
-                        .attr('checked', true);
+            .find('.templates-container:last')
+            .find('label.is-shown:first > input')
+            .attr('checked', true);
 
         $('.block-accordion')
             .accordion({
@@ -105,7 +105,7 @@ $(function() {
         var
             modal   = $('#ajax-modal'),
             blockId = $(this).closest('.block-row').find('.admin_block_select').val();
-            url     = Routing.generate('admin_block_edit', { 'id': blockId, 'layout': '_modal' }),
+        url     = Routing.generate('admin_block_edit', { 'id': blockId, 'layout': '_modal' }),
             title   = $(this).data('title');
 
         $('body').modalmanager('loading');
@@ -187,12 +187,12 @@ $(function() {
     {
         var currentBlockName = block
             .find('option:selected')
-                .html();
+            .html();
 
         block
             .closest('.block-row')
-                .find('.content-block-name')
-                    .text(currentBlockName);
+            .find('.content-block-name')
+            .text(currentBlockName);
     }
 
     function orderBlocks()
@@ -215,13 +215,8 @@ $(function() {
     {
         var blockType = $blockForm.find('.admin_block_select :selected').data('block-type');
 
-        $blockForm.find('.templates-container label').each(function() {
-            if ($(this).data('block-type') == blockType) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
+        $('.templates-container .template-row', $blockForm).hide()
+        $('.templates-container .template-row[data-block-type="'+blockType+'"]', $blockForm).show()
     }
 
 });

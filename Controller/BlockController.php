@@ -132,6 +132,7 @@ class BlockController extends CrudController
                 if ($request->isXmlHttpRequest()) {
                     $content = array(
                         'option'    => array(
+                            'type'  => $pTemplate,
                             'label' => $block->getName() . ' - ' . $block->getParentTemplate(),
                             'value' => $block->getId()
                         )
