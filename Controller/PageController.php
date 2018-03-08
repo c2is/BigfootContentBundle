@@ -175,6 +175,8 @@ class PageController extends CrudController
             if ($form->isValid()) {
                 $this->persistAndFlush($page);
 
+                $this->get('event_dispatcher')->dispatch(CrudController::POST_EDIT, new GenericEvent($page));
+
                 $this->addSuccessFlash(
                     'Page successfully updated!',
                     array(
