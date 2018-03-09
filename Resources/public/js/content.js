@@ -53,7 +53,7 @@ $(function() {
             var newBlockOpt = '<option value="' + responseText.content.option.value + '" data-block-type="'+responseText.content.option.type+'">' + responseText.content.option.label + '</option>';
             var $blocksPrototype = $(decodeEntities($('.widget-blocks').data('prototype')));
 
-            $('.admin_block_select').append(newBlockOpt).trigger('chosen:updated');
+            $('.admin_block_select').append(newBlockOpt).val(responseText.content.option.value).trigger('chosen:updated');
             $('.admin_block_select', $blocksPrototype).append(newBlockOpt);
             $('.widget-blocks').attr('data-prototype', $blocksPrototype.html());
         } else if (responseText.status === 'edit_block') {

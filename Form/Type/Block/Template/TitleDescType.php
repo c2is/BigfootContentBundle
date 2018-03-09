@@ -64,20 +64,6 @@ class TitleDescType extends AbstractType
                     )
                 )
             )
-            ->add(
-                'slug',
-                TextType::class,
-                array(
-                    'required' => false,
-                    'attr'     => array(
-                        'data-placement' => 'bottom',
-                        'data-popover'   => true,
-                        'data-content'   => 'This value is used to generate urls. Should contain only lower case letters and the \'-\' sign.',
-                        'data-title'     => 'Slug',
-                        'data-trigger'   => 'hover',
-                    ),
-                )
-            )
             ->add('description', BigfootRichtextType::class)
             ->add('action', TextType::class, array('required' => false))
             ->add('translation', TranslatedEntityType::class);

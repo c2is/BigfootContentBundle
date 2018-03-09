@@ -39,7 +39,6 @@ class Block extends Content
     /**
      * @var string
      *
-     * @Gedmo\Translatable
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
