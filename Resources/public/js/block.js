@@ -99,6 +99,10 @@ $(function() {
 
     $('.admin-edit-block').unbind('click');
 
+    $('body').on('click', '.admin-create-block', function (event) {
+        $('#ajax-modal').data('block-container', event.currentTarget.closest('.block-row'))
+    })
+
     $('body').on('click', '.admin-edit-block', function (event) {
         event.preventDefault();
 

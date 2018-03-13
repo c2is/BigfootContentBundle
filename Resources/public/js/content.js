@@ -52,10 +52,12 @@ $(function() {
 
             var newBlockOpt = '<option value="' + responseText.content.option.value + '" data-block-type="'+responseText.content.option.type+'">' + responseText.content.option.label + '</option>';
             var $blocksPrototype = $(decodeEntities($('.widget-blocks').data('prototype')));
+            var $blockContainer = $('#ajax-modal').data('block-container');
 
-            $('.admin_block_select').append(newBlockOpt).val(responseText.content.option.value).trigger('chosen:updated');
+            $('.admin_block_select').append(newBlockOpt).trigger('chosen:updated');
             $('.admin_block_select', $blocksPrototype).append(newBlockOpt);
             $('.widget-blocks').attr('data-prototype', $blocksPrototype.html());
+            $('.admin_block_select', $blockContainer).val(responseText.content.option.value).trigger('chosen:updated')
         } else if (responseText.status === 'edit_block') {
             modal.modal('hide');
 
