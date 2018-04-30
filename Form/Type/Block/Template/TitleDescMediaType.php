@@ -56,6 +56,7 @@ class TitleDescMediaType extends AbstractType
                 'title',
                 TextType::class,
                 array(
+                    'required' => false,
                     'attr' => array(
                         'data-placement' => 'bottom',
                         'data-popover'   => true,
