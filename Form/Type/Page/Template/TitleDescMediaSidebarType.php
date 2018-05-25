@@ -46,7 +46,7 @@ class TitleDescMediaSidebarType extends AbstractType
                     'required'      => false,
                     'multiple'      => true,
                     'attr'          => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'Styles applied to this content element.',
                         'data-title'     => 'Style',
@@ -60,7 +60,7 @@ class TitleDescMediaSidebarType extends AbstractType
                 TextType::class,
                 array(
                     'attr' => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'This is the title of the page as displayed to the web user.',
                         'data-title'     => 'Title',
@@ -75,7 +75,7 @@ class TitleDescMediaSidebarType extends AbstractType
                 array(
                     'required' => false,
                     'attr'     => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'This value is used to generate urls. Should contain only lower case letters and the \'-\' sign.',
                         'data-title'     => 'Slug',

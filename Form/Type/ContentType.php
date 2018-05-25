@@ -37,7 +37,7 @@ class ContentType extends AbstractType
                 TextType::class,
                 array(
                     'attr' => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'This is the name of the content in the back office. It will not be displayed to the web user.',
                         'data-title'     => 'Name',

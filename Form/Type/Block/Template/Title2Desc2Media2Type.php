@@ -43,7 +43,7 @@ class Title2Desc2Media2Type extends AbstractType
                     'required'  => false,
                     'multiple'  => true,
                     'attr'      => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'Styles applied to this content element.',
                         'data-title'     => 'Style',
@@ -57,7 +57,7 @@ class Title2Desc2Media2Type extends AbstractType
                 TextType::class,
                 array(
                     'attr' => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'This is the title of the block as displayed to the web user.',
                         'data-title'     => 'Title',
@@ -72,7 +72,7 @@ class Title2Desc2Media2Type extends AbstractType
                 TextType::class,
                 array(
                     'attr' => array(
-                        'data-placement' => 'bottom',
+                        'data-placement' => 'right',
                         'data-popover'   => true,
                         'data-content'   => 'This is the title of the block as displayed to the web user.',
                         'data-title'     => 'Title',

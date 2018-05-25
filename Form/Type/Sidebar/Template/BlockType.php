@@ -41,7 +41,7 @@ class BlockType extends AbstractType
                 'required'      => false,
                 'multiple'      => true,
                 'attr'          => array(
-                    'data-placement' => 'bottom',
+                    'data-placement' => 'right',
                     'data-popover'   => true,
                     'data-content'   => 'Styles applied to this content element.',
                     'data-title'     => 'Style',
