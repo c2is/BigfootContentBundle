@@ -97,7 +97,6 @@ class TitleDesc2MediaBlock2Type extends AbstractType
                     'allow_delete'  => true,
                     'entry_type'    => BlockType::class,
                     'entry_options' => array(
-                        'page'       => $options['data'],
                         'data_class' => 'Bigfoot\Bundle\ContentBundle\Entity\Page\Block',
                     ),
                     'attr'          => array(
@@ -115,7 +114,6 @@ class TitleDesc2MediaBlock2Type extends AbstractType
                     'allow_delete'  => true,
                     'entry_type'    => BlockType::class,
                     'entry_options' => array(
-                        'page'       => $options['data'],
                         'data_class' => 'Bigfoot\Bundle\ContentBundle\Entity\Page\Block2',
                     ),
                     'attr'          => array(
