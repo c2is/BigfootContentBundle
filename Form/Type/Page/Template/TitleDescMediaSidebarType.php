@@ -96,9 +96,6 @@ class TitleDescMediaSidebarType extends AbstractType
                     'allow_add'     => true,
                     'allow_delete'  => true,
                     'entry_type'    => SidebarType::class,
-                    'entry_options' => array(
-                        'page' => $options['data'],
-                    ),
                     'attr'          => array(
                         'class' => 'widget-sidebars',
                     )
