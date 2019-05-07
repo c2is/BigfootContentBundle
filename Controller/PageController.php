@@ -228,7 +228,9 @@ class PageController extends CrudController
     public function getParentTemplate($template)
     {
         $values = explode('_', $template);
-        $end    = call_user_func('end', array_values($values));
+        $arrayValues = array_values($values);
+        $end = end($arrayValues);
+
         return str_replace('_' . $end, '', $template);
     }
 
