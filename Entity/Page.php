@@ -82,6 +82,20 @@ class Page extends Content
     protected $seoDescription;
 
     /**
+     * @var \Datetime
+     *
+     * @ORM\Column(name="publication_start_date", type="datetime", nullable=true)
+     */
+    private $publicationStartDate;
+
+    /**
+     * @var \Datetime
+     *
+     * @ORM\Column(name="publication_end_date", type="datetime", nullable=true)
+     */
+    private $publicationEndDate;
+
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection|\Bigfoot\Bundle\ContentBundle\Entity\Page\Block[]
      *
      * @ORM\OneToMany(targetEntity="Bigfoot\Bundle\ContentBundle\Entity\Page\Block", mappedBy="page", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -1055,5 +1069,43 @@ class Page extends Content
     public static function getTemplateName()
     {
         return 'Page';
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getPublicationStartDate()
+    {
+        return $this->publicationStartDate;
+    }
+
+    /**
+     * @param \Datetime $publicationStartDate
+     * @return Page
+     */
+    public function setPublicationStartDate($publicationStartDate)
+    {
+        $this->publicationStartDate = $publicationStartDate;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getPublicationEndDate()
+    {
+        return $this->publicationEndDate;
+    }
+
+    /**
+     * @param \Datetime $publicationEndDate
+     * @return Page
+     */
+    public function setPublicationEndDate($publicationEndDate)
+    {
+        $this->publicationEndDate = $publicationEndDate;
+
+        return $this;
     }
 }

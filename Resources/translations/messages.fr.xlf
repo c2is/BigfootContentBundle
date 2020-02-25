@@ -10,6 +10,14 @@
         <source>bigfoot_content.page.type.active.label</source>
         <target>Activée</target>
       </trans-unit>
+      <trans-unit id="3">
+        <source>bigfoot_content.page.type.publicationStartDate.label</source>
+        <target>Date de début de publication</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>bigfoot_content.page.type.publicationEndDate.label</source>
+        <target>Date de fin de publication</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
