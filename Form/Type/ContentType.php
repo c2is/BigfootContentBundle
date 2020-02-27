@@ -65,6 +65,7 @@ class ContentType extends AbstractType
                     'publicationStartDate',
                     DateTimePickerType::class,
                     array(
+                        'required' => false,
                         'label' => 'bigfoot_content.page.type.publicationStartDate.label',
                     )
                 )
@@ -72,6 +73,7 @@ class ContentType extends AbstractType
                     'publicationEndDate',
                     DateTimePickerType::class,
                     array(
+                        'required' => false,
                         'label' => 'bigfoot_content.page.type.publicationEndDate.label',
                     )
                 );
